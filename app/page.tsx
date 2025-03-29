@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import styles from './page.module.scss';
 
 export default function DocumentationPage() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     // Initialize theme based on user preference or localStorage
