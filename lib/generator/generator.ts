@@ -1,4 +1,3 @@
-// lib/generator.ts
 import fs from 'fs';
 import path from 'path';
 import { DocBlock } from './parser';
