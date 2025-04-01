@@ -1,7 +1,7 @@
 import {DocPage} from "@/lib/class";
 import {glob} from "glob";
 import path from "path";
-import {generate} from "astring";
+import * as os from "node:os";
 
 export async function generatePage(sourcePath: string = "/") {
     try {
@@ -17,7 +17,7 @@ export async function generatePage(sourcePath: string = "/") {
 export async function generatePageLinks(rootDir: string = "./", docPage: DocPage): Promise<void> {
     try {
         // Find files while ignoring common directories/files
-        const files = await glob("**/*.{js,ts,jsx,tsx}", {
+        const files: string[] = await glob("**/*.{js,ts,jsx,tsx}", {
             cwd: rootDir,
             ignore: [
                 "**/node_modules/**",
@@ -28,11 +28,29 @@ export async function generatePageLinks(rootDir: string = "./", docPage: DocPage
                 "**/*.test.*",
                 "**/*.spec.*"
             ],
-            absolute: true
+            absolute: false
         });
+
+        files.forEach((file: string, index: number) => {
+            if (os.type() === "Windows_NT") {
+                const windowsPath: string = `${file.split("\\").join("/")}`;
+                console.log(windowsPath);
+
+                files[index] = windowsPath;
+            } else {
+                files[index] = file;
+            }
+        })
 
         console.log("Logging files and directories");
         console.log(files);
+
+        /**
+         * Later on, you can split the string using the / character,
+         * and then split the last element using the . character
+         * and then getting the last instance within the string you
+         * just split. That way, you can get the file extension
+         */
 
         docPage.path = rootDir;
         docPage.fileName = path.basename(rootDir);
