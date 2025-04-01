@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
+import type {DocBlock} from "@/lib/types.ts";
 
 export async function parseCodebase(repoPath: string): Promise<DocBlock[]> {
   try {
@@ -70,10 +71,38 @@ export async function parseCodebase(repoPath: string): Promise<DocBlock[]> {
           example = exampleMatch[1].replace(/^\s*\*\s?/gm, '').trim();
         }
 
+        // Extract throws information
+        const throwsRegex = /@throws?\s+(?:{([^}]+)})?\s*(.*?)(?=\s*\*\s*@|\s*\*\/|$)/gs;
+        const throws = [];
+        let throwsMatch;
+
+        while ((throwsMatch = throwsRegex.exec(commentBlock)) !== null) {
+          const [, type = 'Error', throwsDesc = ''] = throwsMatch;
+          throws.push({
+            name: type.split('|')[0].trim(), // Use the first type as the name
+            type: type || 'Error',
+            description: throwsDesc.replace(/\s*\*\s?/g, ' ').trim()
+          });
+        }
+
+        // Extract deprecated information
+        const deprecatedRegex = /@deprecated\s+(.*?)(?=\s*\*\s*@|\s*\*\/|$)/s;
+        const deprecatedMatch = commentBlock.match(deprecatedRegex);
+        let deprecated = undefined;
+
+        if (deprecatedMatch) {
+          deprecated = {
+            used: true,
+            description: deprecatedMatch[1].replace(/\s*\*\s?/g, ' ').trim()
+          };
+        }
+
         docs.push({
           name,
           description,
           params: params.length > 0 ? params : undefined,
+          throws: throws.length > 0 ? throws : undefined,
+          deprecated: deprecated,
           returns,
           example,
           filePath: relativePath

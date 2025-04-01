@@ -1,5 +1,5 @@
-import { parseCodebase } from '@/lib/parser';
-import { generateDocs } from '@/lib/generator';
+import { parseCodebase } from '../lib/parser.ts';
+import { generateContent } from '../lib/generator.ts';
 
 async function main() {
   // The GitHub workspace is provided by the GitHub Actions environment
@@ -10,8 +10,9 @@ async function main() {
   const docs = await parseCodebase(repoPath);
   console.log(`Found ${docs.length} documented items`);
 
+
   console.log(`Generating documentation in: ${outputDir}`);
-  await generateDocs(docs, outputDir);
+  await generateContent(docs, outputDir);
   console.log('Documentation generated successfully');
 }
 
