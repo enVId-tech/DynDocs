@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { DocBlock } from './parser';
+import type { DocBlock } from './types.ts';
 
-export async function generateDocs(docs: DocBlock[], outputDir: string): Promise<void> {
+export async function generateContent(docs: DocBlock[], outputDir: string): Promise<void> {
   try {
     // Ensure output directory exists
     fs.mkdirSync(outputDir, {recursive: true});
@@ -57,7 +57,7 @@ ${docs.length} functions and classes documented from this codebase.
 ${Object.keys(alphabetical).sort().map(letter =>
         `### ${letter}
 
-${alphabetical[letter].map(doc =>
+${alphabetical[letter].map((doc: { name: any; description: string; }) =>
             `- [${doc.name}](./api/${doc.name}.md)${doc.description ? ` - ${doc.description.split('.')[0]}.` : ''}`
         ).join('\n')}`
     ).join('\n\n')}
@@ -79,15 +79,24 @@ ${doc.filePath ? `*Defined in [\`${doc.filePath}\`](../..${doc.filePath?.startsW
 
 ${doc.description || 'No description provided.'}
 
+${doc.deprecated?.used ? `This function in considered deprecated and no longer used. See below for details:\n ${doc.deprecated.description ? doc.deprecated.description : ''}` : ''}
+
 ${doc.params && doc.params.length > 0 ? `## Parameters
 
-${doc.params.map(param => `- \`${param.name}\` (${param.type}): ${param.description || 'No description provided.'}`).join('\n')}
+${doc.params.map((param: { name: any; type: any; description: any; }) => `- \`${param.name}\` (${param.type}): ${param.description || 'No description provided.'}`).join('\n')}
 ` : ''}
 
 ${doc.returns ? `## Returns
 
 (${doc.returns.type}): ${doc.returns.description || 'No description provided.'}
 ` : ''}
+
+${
+          doc.throws ? `## Throws
+          ${doc.throws.map((param: { name: any; type: any; description: any; }) => `- \`${param.name}\` (${param.type}): ${param.description || 'No description provided.'}`).join('\n')}
+          )
+          ` : ''
+      }
 
 ${doc.example ? `## Example
 

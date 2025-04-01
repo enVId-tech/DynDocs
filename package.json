@@ -9,11 +9,16 @@
   },
   "dependencies": {
     "glob": "^11.0.1",
+    "path": "^0.12.7",
     "typescript": "^5.8.2"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14"
+  },
+  "type": "module"
 }

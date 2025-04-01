@@ -1,5 +1,5 @@
 import { parseCodebase } from '@/lib/parser';
-import { generateDocs } from '@/lib/generator';
+import { generateDocs } from '@/lib/generator.ts';
 import path from 'path';
 
 async function main() {
