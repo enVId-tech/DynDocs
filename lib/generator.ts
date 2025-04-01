@@ -79,8 +79,7 @@ ${doc.filePath ? `*Defined in [\`${doc.filePath}\`](../..${doc.filePath?.startsW
 
 ${doc.description || 'No description provided.'}
 
-${doc.deprecated?.used ? `This function in considered deprecated and no longer used. See below for details:\n ${doc.deprecated.description ? doc.deprecated.description : ''}` : ''}
-
+${doc.deprecated?.used ? `This function is considered deprecated and no longer used. See below for details:\n ${doc.deprecated.description ? doc.deprecated.description : ''}` : ''}
 ${doc.params && doc.params.length > 0 ? `## Parameters
 
 ${doc.params.map((param: { name: any; type: any; description: any; }) => `- \`${param.name}\` (${param.type}): ${param.description || 'No description provided.'}`).join('\n')}
