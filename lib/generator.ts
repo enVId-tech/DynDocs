@@ -106,7 +106,10 @@ ${doc.example}
 ` : ''}
 `;
 
-      fs.writeFileSync(path.join(apiDir, `${doc.name}.md`), content);
+      // Specific folder directory
+      const specDir = path.join(apiDir, doc.filePath);
+      fs.mkdirSync(specDir, { recursive: true });
+      fs.writeFileSync(path.join(specDir, `${doc.name}.md`), content);
     }
 
     console.log(`Generated documentation for ${docs.length} items in ${outputDir}`);

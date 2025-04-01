@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node ./main.ts",
+    "dev": "ts-node scripts/generate-docs.ts",
     "start": "npm run dev",
     "test-docs": "ts-node scripts/test-docs.ts"
   },

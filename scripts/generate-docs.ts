@@ -10,6 +10,7 @@ async function main() {
   const docs = await parseCodebase(repoPath);
   console.log(`Found ${docs.length} documented items`);
 
+
   console.log(`Generating documentation in: ${outputDir}`);
   await generateContent(docs, outputDir);
   console.log('Documentation generated successfully');

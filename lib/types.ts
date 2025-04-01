@@ -28,5 +28,5 @@ export interface JSDocBlock {
 export interface DocBlock extends JSDocBlock {
     name: string;
     description: string;
-    filePath?: string;
+    filePath: string;
 };
