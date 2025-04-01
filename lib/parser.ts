@@ -2,15 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
 
-export type DocBlock = {
-  name: string;
-  description: string;
-  params?: Array<{name: string, type: string, description: string}>;
-  returns?: {type: string, description: string};
-  example?: string;
-  filePath?: string;
-};
-
 export async function parseCodebase(repoPath: string): Promise<DocBlock[]> {
   try {
     const docs: DocBlock[] = [];
