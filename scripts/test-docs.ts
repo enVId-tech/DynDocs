@@ -1,5 +1,5 @@
-import { parseCodebase } from '@/lib/parser';
-import { generateContent } from '@/lib/generator.ts';
+import { parseCodebase } from '../lib/parsers/functionParser.ts';
+import { generateContent } from '@/lib/generators/contentGenerator.ts';
 import path from 'path';
 
 async function main() {
@@ -13,7 +13,7 @@ async function main() {
   console.log(`Found ${docs.length} documented items`);
   console.log('Generating documentation...');
 
-  await generateDocs(docs, outputDir);
+  await generateContent(docs, outputDir);
 
   console.log(`Documentation generated successfully in ${outputDir}`);
   console.log('You can now view it by running your Next.js app and navigating to /api');

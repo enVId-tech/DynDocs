@@ -1,5 +1,5 @@
-import { parseCodebase } from '../lib/parser.ts';
-import { generateContent } from '../lib/generator.ts';
+import { parseCodebase } from '../lib/parsers/functionParser.ts';
+import { generateContent } from '../lib/generators/contentGenerator.ts';
 
 async function main() {
   // The GitHub workspace is provided by the GitHub Actions environment

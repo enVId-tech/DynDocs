@@ -1,4 +1,4 @@
-import {generatePage} from "./lib/generator/pageGenerator.ts";
+import {generatePage} from "@/lib/generators/pageGenerator.ts";
 
 /**
  * Main input function of code
