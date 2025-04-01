@@ -8,13 +8,15 @@ export async function generatePage(sourcePath: string = "/") {
         const docPage: DocPage = new DocPage();
 
         // Find files while ignoring common directories/files
-        await generatePageLinks(sourcePath, docPage);
+        const pageLinks: string[] = await generatePageLinks(sourcePath, docPage);
+
+
     } catch (error) {
         console.error("Error generating page:", error);
     }
 }
 
-export async function generatePageLinks(rootDir: string = "./", docPage: DocPage): Promise<void> {
+export async function generatePageLinks(rootDir: string = "./", docPage: DocPage): Promise<string[]> {
     try {
         // Find files while ignoring common directories/files
         const files: string[] = await glob("**/*.{js,ts,jsx,tsx}", {
@@ -52,10 +54,10 @@ export async function generatePageLinks(rootDir: string = "./", docPage: DocPage
          * just split. That way, you can get the file extension
          */
 
-        docPage.path = rootDir;
-        docPage.fileName = path.basename(rootDir);
+        return files;
     } catch (error) {
         console.error("Error generating page links:", error);
+        return [];
     }
 }
 
