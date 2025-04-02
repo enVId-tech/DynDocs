@@ -1,4 +1,6 @@
 namespace Functions {
+    import DocBlock = Docs.DocBlock;
+
     export interface FunctionSignature {
         name: string;
         parameters: Array<{ name: string, type: string }>;
@@ -7,6 +9,6 @@ namespace Functions {
 
     export interface FunctionDoc {
         function: FunctionSignature;
-        doc: DocsBlock.DocBlock;
+        doc: DocBlock;
     }
 }

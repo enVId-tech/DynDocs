@@ -1,4 +1,4 @@
-namespace DocsBlock {
+namespace Docs {
     export interface JSDocBlock {
         params?: Array<{ name: string, type: string, description: string }>;
         returns?: { type: string, description: string };
@@ -9,7 +9,8 @@ namespace DocsBlock {
 
     export interface DocBlock extends JSDocBlock {
         name: string;
-        description: string;
+        type: string;
+        description?: string;
         filePath: string;
     }
 }

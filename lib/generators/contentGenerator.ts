@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import type { DocBlock } from '../types.ts';
 import {generateFile} from "./fileGenerator.ts";
+import DocBlock = Docs.DocBlock;
 
 export async function generateContent(docs: DocBlock[], outputDir: string) {
     try {
