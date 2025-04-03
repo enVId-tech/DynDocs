@@ -24,4 +24,12 @@ class Generator {
     constructor(functions: Map<string, FunctionDoc>) {
         // TODO: Add property initializations here
     }
+
+    set Functions(functions: Map<string, FunctionDoc>) {
+        Generator.functions = functions;
+    }
+
+    get Functions(): Map<string, FunctionDoc> {
+        return Generator.functions;
+    }
 }

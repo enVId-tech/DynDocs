@@ -3,9 +3,9 @@ import path from "path";
 
 /**
  * General library file to generate readme files
- * @param filePath
- * @param content
- * @param docName
+ * @param {string} filePath The absolute path to the file to be generated
+ * @param content The README content to be included
+ * @param docName The name of the file to be generated
  */
 export async function generateFile(filePath: string, content: string, docName: string) {
     fs.mkdirSync(filePath, { recursive: true });
