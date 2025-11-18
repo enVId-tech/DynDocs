@@ -8,7 +8,7 @@
     "test-docs": "ts-node scripts/test-docs.ts"
   },
   "dependencies": {
-    "glob": "^11.0.1",
+    "glob": "^11.1.0",
     "path": "^0.12.7",
     "typescript": "^5.8.2"
   },
