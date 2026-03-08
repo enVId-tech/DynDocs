@@ -8,9 +8,9 @@
     "test-docs": "ts-node scripts/test-docs.ts"
   },
   "dependencies": {
-    "glob": "^11.0.1",
+    "glob": "^13.0.6",
     "path": "^0.12.7",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   },
   "config": {
     "commitizen": {
@@ -18,7 +18,7 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^22.13.14"
+    "@types/node": "^25.3.5"
   },
   "type": "module"
 }
